@@ -1,0 +1,9 @@
+E:\VsProjects\ControlServer\ControlServer\bin\Debug\ControlServer.exe.config
+E:\VsProjects\ControlServer\ControlServer\bin\Debug\ControlServer.exe
+E:\VsProjects\ControlServer\ControlServer\bin\Debug\ControlServer.pdb
+E:\VsProjects\ControlServer\ControlServer\bin\Debug\Newtonsoft.Json.dll
+E:\VsProjects\ControlServer\ControlServer\bin\Debug\Newtonsoft.Json.xml
+E:\VsProjects\ControlServer\ControlServer\obj\Debug\ControlServer.csproj.CoreCompileInputs.cache
+E:\VsProjects\ControlServer\ControlServer\obj\Debug\ControlServer.csproj.CopyComplete
+E:\VsProjects\ControlServer\ControlServer\obj\Debug\ControlServer.exe
+E:\VsProjects\ControlServer\ControlServer\obj\Debug\ControlServer.pdb

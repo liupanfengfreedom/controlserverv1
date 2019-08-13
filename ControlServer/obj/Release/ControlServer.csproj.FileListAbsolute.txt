@@ -1,0 +1,10 @@
+E:\VsProjects\ControlServer\ControlServer\bin\Release\ControlServer.exe.config
+E:\VsProjects\ControlServer\ControlServer\bin\Release\ControlServer.exe
+E:\VsProjects\ControlServer\ControlServer\bin\Release\ControlServer.pdb
+E:\VsProjects\ControlServer\ControlServer\bin\Release\Newtonsoft.Json.dll
+E:\VsProjects\ControlServer\ControlServer\bin\Release\Newtonsoft.Json.xml
+E:\VsProjects\ControlServer\ControlServer\obj\Release\ControlServer.csproj.CoreCompileInputs.cache
+E:\VsProjects\ControlServer\ControlServer\obj\Release\ControlServer.csproj.CopyComplete
+E:\VsProjects\ControlServer\ControlServer\obj\Release\ControlServer.exe
+E:\VsProjects\ControlServer\ControlServer\obj\Release\ControlServer.pdb
+E:\VsProjects\ControlServer\ControlServer\obj\Release\ControlServer.csprojAssemblyReference.cache
