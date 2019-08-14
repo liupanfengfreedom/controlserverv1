@@ -28,6 +28,12 @@ namespace ControlServer
     {
         static void Main(string[] args)
         {
+            string sourcepath = @"F:\uev\Content";
+            string despath = @"F:\UE4 projects\bplab\Content";
+            Utility.DirectoryCopy(sourcepath, despath, true);
+            Utility.SubDirectoryDelete(despath);
+
+
             IPAddress ipAd = IPAddress.Parse("192.168.1.240");
             TcpListener myList = new TcpListener(ipAd, 8003);
 

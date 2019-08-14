@@ -125,7 +125,9 @@ namespace ControlServer
                 {
                     case MessageType.ASSIGNOK:
                         Thread.Sleep(6000);
-                        sendstringtest();
+                         string path = @"C:\Program Files\Epic Games\UE_4.22\Engine\Build\BatchFiles\RunUAT.bat";
+                         string Arguments = "BuildCookRun -project=D:\\ueprojecttest/MyProject/MyProject.uproject  -noP4 -platform=Android -clientconfig=Development -serverconfig=Development -cook -allmaps -stage -pak -archive";
+                        Utility.CommandRun(path,Arguments); ;
 
                         break;
                     case MessageType.EMPTY:
