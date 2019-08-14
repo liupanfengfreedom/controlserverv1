@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using System.Diagnostics;
 using System.Net.Sockets;
 namespace ControlServer
 {
@@ -28,22 +29,26 @@ namespace ControlServer
     {
         static void Main(string[] args)
         {
-            string sourcepath = @"F:\uev\Content";
-            string despath = @"F:\UE4 projects\bplab\Content";
-            Utility.DirectoryCopy(sourcepath, despath, true);
-            Utility.SubDirectoryDelete(despath);
-
 
             IPAddress ipAd = IPAddress.Parse("192.168.1.240");
             TcpListener myList = new TcpListener(ipAd, 8003);
+            myList.Start();
+
+            string projectpath = @"F:\uev/pro422.uproject";
+            string Arguments = "";
+            projectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
+            Arguments = @"F:\uev/pro422.uproject";
+            Process mpro = Utility.CommandRun(projectpath, Arguments);
+  
 
             /* Start Listeneting at the specified port */
-            myList.Start();
             while (true)
             {
                 Socket st = myList.AcceptSocket();
                 TCPClient tcpClient = new TCPClient(st);
-    
+                tcpClient.mprocess = mpro;
+
+
             }
         }
     }

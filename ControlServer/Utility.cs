@@ -18,7 +18,7 @@ namespace ControlServer
         static string Arguments = "BuildCookRun -project=D:\\ueprojecttest/MyProject/MyProject.uproject  -noP4 -platform=Android -clientconfig=Development -serverconfig=Development -cook -allmaps -stage -pak -archive";
 #endregion
 
-        public static void CommandRun(string exe, string arguments)
+        public static Process CommandRun(string exe, string arguments)
         {
             try
             {
@@ -31,11 +31,13 @@ namespace ControlServer
                 };
                 Process p = Process.Start(info);
                 //p.WaitForExit();
+                return p;
             }
             catch (Exception e)
             {
                 // Log.Error(e);
             }
+            return null;
         }
         public static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
         {

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using System.Threading;
 namespace ControlServer
@@ -28,7 +29,7 @@ namespace ControlServer
         public byte[] receivebuffer = new byte[BUFFER_SIZE];
 
         Thread ReceiveThread;
-
+        public Process mprocess;
         public TCPClient(Socket msocket)
         {
             Console.WriteLine("TCPClient " + msocket.RemoteEndPoint);
@@ -52,7 +53,11 @@ namespace ControlServer
         void sendstringtest()
         {
             FMessagePackage filesend = new FMessagePackage();
-            filesend.MT = MessageType.ASSIGNID;//receive ok           
+            filesend.MT = MessageType.ASSIGNID;//     
+            //SkeletalMesh'/Game/Vehicles/VH_Buggy/Mesh/SK_Buggy_Vehicle.SK_Buggy_Vehicle'
+            string path = "/Game/Vehicles/VH_Buggy/Mesh/SK_Buggy_Vehicle";
+            string id = "1";
+            filesend.PayLoad = "?"+path+"?"+id;
             string strsend = JsonConvert.SerializeObject(filesend);
             Send(strsend);
         }
@@ -125,9 +130,20 @@ namespace ControlServer
                 {
                     case MessageType.ASSIGNOK:
                         Thread.Sleep(6000);
-                         string path = @"C:\Program Files\Epic Games\UE_4.22\Engine\Build\BatchFiles\RunUAT.bat";
-                         string Arguments = "BuildCookRun -project=D:\\ueprojecttest/MyProject/MyProject.uproject  -noP4 -platform=Android -clientconfig=Development -serverconfig=Development -cook -allmaps -stage -pak -archive";
-                        Utility.CommandRun(path,Arguments); ;
+                        if (mprocess!=null&&!mprocess.HasExited)
+                        {
+                            mprocess.Kill();
+                        }
+                        string sourcepath = @"F:\uev\Content";
+                        string despath = @"F:\UE4projects\bplab\Content";
+                        Utility.SubDirectoryDelete(despath);
+                        string pakpath = @"F:\UE4projects\bplab\Saved\StagedBuilds\Android\bplab\Content";
+                        Utility.SubDirectoryDelete(pakpath);
+                        Utility.DirectoryCopy(sourcepath, despath, true);
+
+                        string path = @"C:\Program Files\Epic Games\UE_4.22\Engine\Build\BatchFiles\RunUAT.bat";
+                        string Arguments = "BuildCookRun -project=F:\\UE4projects/bplab/bplab.uproject  -noP4 -platform=Android -clientconfig=Development -serverconfig=Development -cook -allmaps -stage -pak -archive";
+                        Utility.CommandRun(path, Arguments);
 
                         break;
                     case MessageType.EMPTY:
