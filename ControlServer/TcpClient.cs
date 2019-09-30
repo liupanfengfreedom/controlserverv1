@@ -134,16 +134,37 @@ namespace ControlServer
                         {
                             mprocess.Kill();
                         }
+                        //content copy begin
                         string sourcepath = @"F:\uev\Content";
                         string despath = @"F:\UE4projects\bplab\Content";
                         Utility.SubDirectoryDelete(despath);
-                        string pakpath = @"F:\UE4projects\bplab\Saved\StagedBuilds\Android\bplab\Content";
-                        Utility.SubDirectoryDelete(pakpath);
                         Utility.DirectoryCopy(sourcepath, despath, true);
+                        //content copy end
+                        //delete old data begin
+                        string pakpath = @"F:\UE4projects\bplab\Saved";
+                        Utility.SubDirectoryDelete(pakpath);
+                        //delete old data end
 
+
+                        //////////////////////////////////////////////////////////////////
+                        ////////////////////////cook for Android begin
                         string path = @"C:\Program Files\Epic Games\UE_4.22\Engine\Build\BatchFiles\RunUAT.bat";
                         string Arguments = "BuildCookRun -project=F:\\UE4projects/bplab/bplab.uproject  -noP4 -platform=Android -clientconfig=Development -serverconfig=Development -cook -allmaps -stage -pak -archive";
-                        Utility.CommandRun(path, Arguments);
+                        Process tempprocess = Utility.CommandRun(path, Arguments);
+                        tempprocess.WaitForExit();
+                        /////////////////////////////////////////////////////////////////
+                        /////////////////////////cook for Android end
+                        //////////////////////////////////////////////////////////////////
+                        ////////////////////////cook for ios begin
+                        Arguments = "BuildCookRun -project=F:\\UE4projects/bplab/bplab.uproject  -noP4 -platform=IOS -clientconfig=Development -serverconfig=Development -cook -allmaps -stage -pak -archive";
+                        tempprocess = Utility.CommandRun(path, Arguments);
+                        tempprocess.WaitForExit();
+                        /////////////////////////////////////////////////////////////////
+                        /////////////////////////cook for ios end
+
+                        Console.WriteLine("hi");
+                        string paksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\Android\bplab\Content\Paks/pakchunk1-Android.pak";
+
 
                         break;
                     case MessageType.EMPTY:

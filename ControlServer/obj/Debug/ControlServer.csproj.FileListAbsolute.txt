@@ -12,8 +12,10 @@ E:\VsProjects\controlserverv1\ControlServer\bin\Debug\ControlServer.exe
 E:\VsProjects\controlserverv1\ControlServer\bin\Debug\ControlServer.pdb
 E:\VsProjects\controlserverv1\ControlServer\bin\Debug\Newtonsoft.Json.dll
 E:\VsProjects\controlserverv1\ControlServer\bin\Debug\Newtonsoft.Json.xml
-E:\VsProjects\controlserverv1\ControlServer\obj\Debug\ControlServer.csprojAssemblyReference.cache
 E:\VsProjects\controlserverv1\ControlServer\obj\Debug\ControlServer.csproj.CoreCompileInputs.cache
 E:\VsProjects\controlserverv1\ControlServer\obj\Debug\ControlServer.csproj.CopyComplete
 E:\VsProjects\controlserverv1\ControlServer\obj\Debug\ControlServer.exe
 E:\VsProjects\controlserverv1\ControlServer\obj\Debug\ControlServer.pdb
+E:\VsProjects\controlserverv1\ControlServer\bin\Debug\System.IO.Compression.dll
+E:\VsProjects\controlserverv1\ControlServer\bin\Debug\System.IO.Compression.ZipFile.dll
+E:\VsProjects\controlserverv1\ControlServer\obj\Debug\ControlServer.csprojAssemblyReference.cache
