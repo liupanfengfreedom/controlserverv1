@@ -44,11 +44,11 @@ namespace ControlServer
                             path = @"F:\uev";//\Content;
                             Utility.SubDirectoryDelete(path+ "/Content");
                             //Thread.Sleep(5000);
-                            File.WriteAllBytes(path+"/x.rar", bytearray);
+                            File.WriteAllBytes(path+ "/Saved/x.rar", bytearray);
                             Console.WriteLine("writefileok");
                            //Thread.Sleep(5000);
                             string apppath = @"E:\Program Files\7-Zip\7zG.exe";
-                            string passArguments = "x F:/uev/x.rar -oF:/uev/Content";
+                            string passArguments = "x F:/uev/Saved/x.rar -oF:/uev/Content";
                             Process z7p = Utility.CommandRun(apppath, passArguments);
                             z7p.WaitForExit();
 
