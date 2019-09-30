@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Net.Http;
 using System.Threading;
 namespace ControlServer
 {
@@ -163,8 +164,19 @@ namespace ControlServer
                         /////////////////////////////////////////////////////////////////
                         /////////////////////////cook for ios end
 
-                        Console.WriteLine("hi");
-                        string paksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\Android\bplab\Content\Paks/pakchunk1-Android.pak";
+                        //Console.WriteLine("hi");
+                        //string androidpaksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\Android\bplab\Content\Paks/pakchunk1-Android.pak";
+                        //string iospaksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\IOS\cookeddata\bplab\content\paks/pakchunk1-ios.pak";
+                        //string remotehttpserver="";
+                        //var payload = new Dictionary<string, string>
+                        //{
+                        //  {"assetpath", mp.PayLoad},
+                        //  {"androidpakpath", androidpaksfilepath},
+                        //  {"iospakpath", iospaksfilepath}
+                        //};
+                        //string strPayload = JsonConvert.SerializeObject(payload);
+                        //HttpContent httpContent = new StringContent(strPayload, Encoding.UTF8, "application/json");
+                        //HttpclientHelper.httppost(remotehttpserver,httpContent);
 
                         OnClientExit();
                         break;
