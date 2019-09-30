@@ -27,8 +27,9 @@ namespace ControlServer
                     //response.EnsureSuccessStatusCode();
                     if (response.IsSuccessStatusCode)
                     {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        byte[] bytes = await response.Content.ReadAsByteArrayAsync();
+                        string responseBody = "";
+                        //responseBody = await response.Content.ReadAsStringAsync();//string may cause error here when file is too large
+                        byte[] bytes = await response.Content.ReadAsByteArrayAsync();//max file size is 1.2G
                         callback?.Invoke(ref responseBody, ref bytes);
                     }
                 }
@@ -66,5 +67,8 @@ namespace ControlServer
                 }
             }
         }
+
+
+
     }
 }

@@ -33,13 +33,14 @@ namespace ControlServer
                 string[] headerallkeys = header.AllKeys;
                 foreach (var a in headerallkeys)
                 {
-                    if (a.Equals("RARpath"))
+                    if (a.Equals("RARpath"))//
                     {
                         string[] values = header.GetValues(a);
                         HttpclientHelper.httpget(values[0],(ref string str,ref byte[] bytearray)=> {
                             string path = AppDomain.CurrentDomain.BaseDirectory;
                             path += "x.rar";
-                            File.WriteAllBytes(path,bytearray);
+                            File.WriteAllBytes(path, bytearray);
+                            Console.WriteLine("writefileok");
                         });
                     }
                 }
