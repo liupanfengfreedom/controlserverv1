@@ -39,13 +39,14 @@ namespace ControlServer
             //string apppath = @"E:\Program Files\7-Zip\7zG.exe";
             //string passArguments = "x G:/UE4projects/MyProject4/Content/TwinStick.rar -oG:/UE4projects/MyProject4/Content/12";
             //Utility.CommandRun(apppath, passArguments);
+
             HttpServerThread = new Thread(new ThreadStart(httpserverthread));
             HttpServerThread.IsBackground = true;
             HttpServerThread.Start();
 
             while (true)
             {
-                bool b =  HttpServerThread.IsAlive;
+                bool b = HttpServerThread.IsAlive;
                 if (!b)
                 {
                     HttpServerThread = new Thread(new ThreadStart(httpserverthread));
@@ -54,25 +55,23 @@ namespace ControlServer
                 }
                 Thread.Sleep(1000);
             }
-            //IPAddress ipAd = IPAddress.Parse("192.168.1.240");
-            //TcpListener myList = new TcpListener(ipAd, 8003);
-            //myList.Start();
+            //  IPAddress ipAd = IPAddress.Parse("192.168.1.240");
+            //  TcpListener myList = new TcpListener(ipAd, 8003);
+            //  myList.Start();
 
-            //string projectpath = @"F:\uev/pro422.uproject";
-            //string Arguments = "";
-            //projectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
-            //Arguments = @"F:\uev/pro422.uproject";
-            //Process mpro = Utility.CommandRun(projectpath, Arguments);
-          
-            //while (true)
-            //{
-            //    Socket st = myList.AcceptSocket();
-            //    TCPClient tcpClient = new TCPClient(st);
-            //    tcpClient.mprocess = mpro;
+            //  string projectpath = @"F:\uev/pro422.uproject";
+            //  string Arguments = "";
+            //  projectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
+            //  Arguments = @"F:\uev/pro422.uproject";
+            ////  Process mpro = Utility.CommandRun(projectpath, Arguments);
 
-
-            //}
-            return 9;
+            //  while (true)
+            //  {
+            //      Socket st = myList.AcceptSocket();
+            //      TCPClient tcpClient = new TCPClient(st);
+            //    //  tcpClient.mprocess = mpro;
+            //  }
+            //  return 9;
         }
         static void httpserverthread()
         {

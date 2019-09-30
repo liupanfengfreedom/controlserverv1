@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.Net.Sockets;
+using System.Diagnostics;
 
 namespace ControlServer
 {
@@ -39,8 +41,30 @@ namespace ControlServer
                         HttpclientHelper.httpget(values[0],(ref string str,ref byte[] bytearray)=> {
                             string path = AppDomain.CurrentDomain.BaseDirectory;
                             path += "x.rar";
-                            File.WriteAllBytes(path, bytearray);
+                            path = @"F:\uev";//\Content;
+                            Utility.SubDirectoryDelete(path+ "/Content");
+                            //Thread.Sleep(5000);
+                            File.WriteAllBytes(path+"/x.rar", bytearray);
                             Console.WriteLine("writefileok");
+                           //Thread.Sleep(5000);
+                            string apppath = @"E:\Program Files\7-Zip\7zG.exe";
+                            string passArguments = "x F:/uev/x.rar -oF:/uev/Content";
+                            Process z7p = Utility.CommandRun(apppath, passArguments);
+                            z7p.WaitForExit();
+
+                            IPAddress ipAd = IPAddress.Parse("192.168.1.240");
+                            TcpListener myList = new TcpListener(ipAd, 8003);
+                            myList.Start();
+                            string projectpath = @"F:\uev/pro422.uproject";
+                            string Arguments = "";
+                            projectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
+                            Arguments = @"F:\uev/pro422.uproject";
+                            Process mpro = Utility.CommandRun(projectpath, Arguments);
+                            Socket st = myList.AcceptSocket();
+                            TCPClient tcpClient = new TCPClient(st);
+                            tcpClient.mtcplistener = myList;
+                            tcpClient.mprocess = mpro;
+
                         });
                     }
                 }

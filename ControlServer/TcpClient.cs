@@ -22,6 +22,7 @@ namespace ControlServer
         /// </summary>
         public bool isinmatchpool = false;
         public bool mclosed = false;
+        public TcpListener mtcplistener;
         Socket clientsocket;
          OnReceivedCompleted OnReceivedCompletePointer = null;
          OnFileReceivedCompleted onfilereceivedcompleted = null;
@@ -165,7 +166,7 @@ namespace ControlServer
                         Console.WriteLine("hi");
                         string paksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\Android\bplab\Content\Paks/pakchunk1-Android.pak";
 
-
+                        OnClientExit();
                         break;
                     case MessageType.EMPTY:
                 
@@ -186,6 +187,7 @@ namespace ControlServer
         {    
             mclosed = true;
             CloseSocket();
+            mtcplistener?.Stop();
             ReceiveThread.Abort();
         }
 
