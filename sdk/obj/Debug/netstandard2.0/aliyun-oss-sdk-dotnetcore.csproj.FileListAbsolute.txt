@@ -1,0 +1,12 @@
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\bin\Debug\netstandard2.0\Aliyun.OSS.Core.deps.json
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\bin\Debug\netstandard2.0\Aliyun.OSS.Core.dll
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\bin\Debug\netstandard2.0\Aliyun.OSS.Core.pdb
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\obj\Debug\netstandard2.0\aliyun-oss-sdk-dotnetcore.csprojAssemblyReference.cache
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\obj\Debug\netstandard2.0\Aliyun.OSS.Domain.OssResources.resources
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\obj\Debug\netstandard2.0\Aliyun.OSS.Properties.Resources.resources
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\obj\Debug\netstandard2.0\aliyun-oss-sdk-dotnetcore.csproj.GenerateResource.cache
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\obj\Debug\netstandard2.0\aliyun-oss-sdk-dotnetcore.csproj.CoreCompileInputs.cache
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\obj\Debug\netstandard2.0\aliyun-oss-sdk-dotnetcore.AssemblyInfoInputs.cache
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\obj\Debug\netstandard2.0\aliyun-oss-sdk-dotnetcore.AssemblyInfo.cs
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\obj\Debug\netstandard2.0\Aliyun.OSS.Core.dll
+G:\11\aliyun-oss-csharp-sdk-master\aliyun-oss-csharp-sdk-master\sdk\obj\Debug\netstandard2.0\Aliyun.OSS.Core.pdb

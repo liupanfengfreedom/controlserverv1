@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ using System.Diagnostics;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading;
+using Aliyun.OSS.Samples;
+using Aliyun.OSS;
 namespace ControlServer
 {
 
@@ -165,19 +168,36 @@ namespace ControlServer
                         /////////////////////////cook for ios end
 
                         //Console.WriteLine("hi");
-                        //string androidpaksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\Android\bplab\Content\Paks/pakchunk1-Android.pak";
-                        //string iospaksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\IOS\cookeddata\bplab\content\paks/pakchunk1-ios.pak";
-                        //string remotehttpserver="";
-                        //var payload = new Dictionary<string, string>
-                        //{
-                        //  {"assetpath", mp.PayLoad},
-                        //  {"androidpakpath", androidpaksfilepath},
-                        //  {"iospakpath", iospaksfilepath}
-                        //};
-                        //string strPayload = JsonConvert.SerializeObject(payload);
-                        //HttpContent httpContent = new StringContent(strPayload, Encoding.UTF8, "application/json");
-                        //HttpclientHelper.httppost(remotehttpserver,httpContent);
+                        string androidpaksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\Android\bplab\Content\Paks/pakchunk1-Android.pak";
+                        string iospaksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\IOS\cookeddata\bplab\content\paks/pakchunk1-ios.pak";
+                        Guid g;
+                        // Create and display the value of two GUIDs.
+                        g = Guid.NewGuid();
+                        string guidstring = g.ToString();
+                        string androidmd5 = guidstring+".pak";
+                        g = Guid.NewGuid();
+                        guidstring = g.ToString();
+                        string iosmd5 = guidstring + ".pak";
+                        OssClient client = new OssClient(Config.Endpoint, Config.AccessKeyId, Config.AccessKeySecret);
+                        const string bucketName = "coresnow-circle";
+                        string key = "yourfolder/"+ androidmd5;
+                        string androidkey = "works/"+ androidmd5;
+                        client.PutObject(bucketName, androidkey, androidpaksfilepath);
+                        string ioskey = "works/" + iosmd5;
+                        client.PutObject(bucketName, ioskey, iospaksfilepath);
 
+                        string remotehttpserver = "http://192.168.1.174:8080/";
+                        var payload = new Dictionary<string, string>
+                        {
+                          {"wid","null"},
+                          {"assetpath", mp.PayLoad},
+                          {"android_pak", bucketName+"/"+androidkey},
+                          {"ios_pak", bucketName+"/"+ioskey}
+                        };
+                        string strPayload = JsonConvert.SerializeObject(payload);
+                        HttpContent httpContent = new StringContent(strPayload, Encoding.UTF8, "application/json");
+                        //HttpclientHelper.httppost(remotehttpserver, httpContent);
+                        Program.evtObj.Set();
                         OnClientExit();
                         break;
                     case MessageType.EMPTY:

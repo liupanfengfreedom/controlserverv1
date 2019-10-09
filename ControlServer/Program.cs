@@ -29,9 +29,13 @@ namespace ControlServer
     }
     class Program
     {
+        public static Queue<string> rarqueue = new Queue<string>();
+        //public static ManualResetEvent evtObj = new ManualResetEvent(false);
+        public static AutoResetEvent evtObj = new AutoResetEvent(false);
         static int Main(string[] args)
         {
             Thread HttpServerThread;
+            Thread ConvertThread;
             //string path = AppDomain.CurrentDomain.BaseDirectory;
             //string filestring = File.ReadAllText(@"D:\SVNprository\program\Project\InfiniteLife1_1\Content\Movies/makeup.ini");
 
@@ -43,6 +47,10 @@ namespace ControlServer
             HttpServerThread = new Thread(new ThreadStart(httpserverthread));
             HttpServerThread.IsBackground = true;
             HttpServerThread.Start();
+
+            ConvertThread = new Thread(new ThreadStart(convertthreadwork));
+            ConvertThread.IsBackground = true;
+            ConvertThread.Start();
 
             while (true)
             {
@@ -75,7 +83,8 @@ namespace ControlServer
         }
         static void httpserverthread()
         {
-            string[] prefixes = { "http://localhost:7000/", "http://192.168.1.240:7000/" };
+            //string[] prefixes = { "http://localhost:7000/", "http://192.168.1.240:7000/" };
+            string[] prefixes = {"http://192.168.1.240:7000/" };
             if (!HttpListener.IsSupported)
             {
                 Console.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
@@ -112,6 +121,44 @@ namespace ControlServer
 
             }
         }
-       
+        static void convertthreadwork()
+        {
+            while (true) {
+                Thread.Sleep(1000);               
+                if (rarqueue.Count > 0)
+                {
+                    string newrar = rarqueue.Dequeue();
+                    HttpclientHelper.httpget(newrar, (ref string str, ref byte[] bytearray) => {
+                        string path = AppDomain.CurrentDomain.BaseDirectory;
+                        path += "x.rar";
+                        path = @"F:\uev";//\Content;
+                        Utility.SubDirectoryDelete(path + "/Content");
+                        //Thread.Sleep(5000);
+                        File.WriteAllBytes(path + "/Saved/x.rar", bytearray);
+                        Console.WriteLine("writefileok");
+                        //Thread.Sleep(5000);
+                        string apppath = @"E:\Program Files\7-Zip\7zG.exe";
+                        string passArguments = "x F:/uev/Saved/x.rar -oF:/uev/Content";
+                        Process z7p = Utility.CommandRun(apppath, passArguments);
+                        z7p.WaitForExit();
+
+                        IPAddress ipAd = IPAddress.Parse("192.168.1.240");
+                        TcpListener myList = new TcpListener(ipAd, 8003);
+                        myList.Start();
+                        string projectpath = @"F:\uev/pro422.uproject";
+                        string Arguments = "";
+                        projectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
+                        Arguments = @"F:\uev/pro422.uproject";
+                        Process mpro = Utility.CommandRun(projectpath, Arguments);
+                        Socket st = myList.AcceptSocket();
+                        TCPClient tcpClient = new TCPClient(st);
+                        tcpClient.mtcplistener = myList;
+                        tcpClient.mprocess = mpro;
+                        evtObj.WaitOne();
+                    });
+                }
+            }
+            
+        }
     }
 }

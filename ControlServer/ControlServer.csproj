@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
     <Compile Include="HttpclientHelper.cs" />
     <Compile Include="HttpListenerContextClass.cs" />
     <Compile Include="Program.cs" />
@@ -63,6 +64,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sdk\aliyun-oss-sdk.csproj">
+      <Project>{67bdc800-084c-4f84-8a80-661b5afe499a}</Project>
+      <Name>aliyun-oss-sdk</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

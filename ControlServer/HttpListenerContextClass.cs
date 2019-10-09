@@ -38,34 +38,35 @@ namespace ControlServer
                     if (a.Equals("RARpath"))//
                     {
                         string[] values = header.GetValues(a);
-                        HttpclientHelper.httpget(values[0],(ref string str,ref byte[] bytearray)=> {
-                            string path = AppDomain.CurrentDomain.BaseDirectory;
-                            path += "x.rar";
-                            path = @"F:\uev";//\Content;
-                            Utility.SubDirectoryDelete(path+ "/Content");
-                            //Thread.Sleep(5000);
-                            File.WriteAllBytes(path+ "/Saved/x.rar", bytearray);
-                            Console.WriteLine("writefileok");
-                           //Thread.Sleep(5000);
-                            string apppath = @"E:\Program Files\7-Zip\7zG.exe";
-                            string passArguments = "x F:/uev/Saved/x.rar -oF:/uev/Content";
-                            Process z7p = Utility.CommandRun(apppath, passArguments);
-                            z7p.WaitForExit();
+                        Program.rarqueue.Enqueue(values[0]);
+                        //HttpclientHelper.httpget(values[0],(ref string str,ref byte[] bytearray)=> {
+                        //    string path = AppDomain.CurrentDomain.BaseDirectory;
+                        //    path += "x.rar";
+                        //    path = @"F:\uev";//\Content;
+                        //    Utility.SubDirectoryDelete(path+ "/Content");
+                        //    //Thread.Sleep(5000);
+                        //    File.WriteAllBytes(path+ "/Saved/x.rar", bytearray);
+                        //    Console.WriteLine("writefileok");
+                        //   //Thread.Sleep(5000);
+                        //    string apppath = @"E:\Program Files\7-Zip\7zG.exe";
+                        //    string passArguments = "x F:/uev/Saved/x.rar -oF:/uev/Content";
+                        //    Process z7p = Utility.CommandRun(apppath, passArguments);
+                        //    z7p.WaitForExit();
 
-                            IPAddress ipAd = IPAddress.Parse("192.168.1.240");
-                            TcpListener myList = new TcpListener(ipAd, 8003);
-                            myList.Start();
-                            string projectpath = @"F:\uev/pro422.uproject";
-                            string Arguments = "";
-                            projectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
-                            Arguments = @"F:\uev/pro422.uproject";
-                            Process mpro = Utility.CommandRun(projectpath, Arguments);
-                            Socket st = myList.AcceptSocket();
-                            TCPClient tcpClient = new TCPClient(st);
-                            tcpClient.mtcplistener = myList;
-                            tcpClient.mprocess = mpro;
+                        //    IPAddress ipAd = IPAddress.Parse("192.168.1.240");
+                        //    TcpListener myList = new TcpListener(ipAd, 8003);
+                        //    myList.Start();
+                        //    string projectpath = @"F:\uev/pro422.uproject";
+                        //    string Arguments = "";
+                        //    projectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
+                        //    Arguments = @"F:\uev/pro422.uproject";
+                        //    Process mpro = Utility.CommandRun(projectpath, Arguments);
+                        //    Socket st = myList.AcceptSocket();
+                        //    TCPClient tcpClient = new TCPClient(st);
+                        //    tcpClient.mtcplistener = myList;
+                        //    tcpClient.mprocess = mpro;
 
-                        });
+                        //});
                     }
                 }
                 System.IO.Stream input = request.InputStream;
