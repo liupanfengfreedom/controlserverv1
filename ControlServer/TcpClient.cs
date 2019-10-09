@@ -197,9 +197,12 @@ namespace ControlServer
                         string strPayload = JsonConvert.SerializeObject(payload);
                         HttpContent httpContent = new StringContent(strPayload, Encoding.UTF8, "application/json");
                         int retrycounter = 0;
- retry:
+retry:
+                        window_file_log.Log("retrycounter :"+ retrycounter);
+                        window_file_log.Log(strPayload);
                         int shouldretry=0;
                         HttpclientHelper.httppost(remotehttpserver, httpContent, (ref string strparameter, ref byte[] bytearray) => {
+                            window_file_log.Log(strparameter);
                             if (!String.IsNullOrEmpty(strparameter))
                             {
                                 if (!strparameter.Contains("\"code\":200"))

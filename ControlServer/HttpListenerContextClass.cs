@@ -53,6 +53,8 @@ namespace ControlServer
                         rarmessage mmessage;
                         mmessage.rarpath = values[0];
                         mmessage.wid = wid;
+                        window_file_log.Log(" mmessage.rarpath :" + mmessage.rarpath);
+                        window_file_log.Log(" mmessage.wid :" + mmessage.wid);
                         Program.rarqueue.Enqueue(mmessage);      
                     }
                 }
