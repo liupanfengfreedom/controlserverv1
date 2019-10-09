@@ -7,3 +7,11 @@ E:\VsProjects\alioss\alioss\sdk\obj\Debug\aliyun-oss-sdk.csproj.GenerateResource
 E:\VsProjects\alioss\alioss\sdk\obj\Debug\aliyun-oss-sdk.csproj.CoreCompileInputs.cache
 E:\VsProjects\alioss\alioss\sdk\obj\Debug\Aliyun.OSS.dll
 E:\VsProjects\alioss\alioss\sdk\obj\Debug\Aliyun.OSS.pdb
+E:\VsProjects\controlserverv1\sdk\bin\Debug\Aliyun.OSS.dll
+E:\VsProjects\controlserverv1\sdk\bin\Debug\Aliyun.OSS.pdb
+E:\VsProjects\controlserverv1\sdk\obj\Debug\Aliyun.OSS.Domain.OssResources.resources
+E:\VsProjects\controlserverv1\sdk\obj\Debug\Aliyun.OSS.Properties.Resources.resources
+E:\VsProjects\controlserverv1\sdk\obj\Debug\aliyun-oss-sdk.csproj.GenerateResource.cache
+E:\VsProjects\controlserverv1\sdk\obj\Debug\aliyun-oss-sdk.csproj.CoreCompileInputs.cache
+E:\VsProjects\controlserverv1\sdk\obj\Debug\Aliyun.OSS.dll
+E:\VsProjects\controlserverv1\sdk\obj\Debug\Aliyun.OSS.pdb

@@ -154,8 +154,8 @@ namespace ControlServer
                         TCPClient tcpClient = new TCPClient(st);
                         tcpClient.mtcplistener = myList;
                         tcpClient.mprocess = mpro;
-                        evtObj.WaitOne();
                     });
+                    evtObj.WaitOne();
                 }
             }
             

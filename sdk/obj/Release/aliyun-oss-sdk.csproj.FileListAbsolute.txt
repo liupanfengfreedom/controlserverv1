@@ -1,0 +1,11 @@
+E:\VsProjects\controlserverv1\sdk\bin\Release\Aliyun.OSS.XML
+E:\VsProjects\controlserverv1\sdk\bin\Release\Aliyun.OSS.dll
+E:\VsProjects\controlserverv1\sdk\bin\Release\Aliyun.OSS.pdb
+E:\VsProjects\controlserverv1\sdk\bin\Release\Aliyun.OSS.dll.CodeAnalysisLog.xml
+E:\VsProjects\controlserverv1\sdk\bin\Release\Aliyun.OSS.dll.lastcodeanalysissucceeded
+E:\VsProjects\controlserverv1\sdk\obj\Release\Aliyun.OSS.Domain.OssResources.resources
+E:\VsProjects\controlserverv1\sdk\obj\Release\Aliyun.OSS.Properties.Resources.resources
+E:\VsProjects\controlserverv1\sdk\obj\Release\aliyun-oss-sdk.csproj.GenerateResource.cache
+E:\VsProjects\controlserverv1\sdk\obj\Release\aliyun-oss-sdk.csproj.CoreCompileInputs.cache
+E:\VsProjects\controlserverv1\sdk\obj\Release\Aliyun.OSS.dll
+E:\VsProjects\controlserverv1\sdk\obj\Release\Aliyun.OSS.pdb
