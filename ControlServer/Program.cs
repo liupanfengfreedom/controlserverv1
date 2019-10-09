@@ -27,9 +27,15 @@ namespace ControlServer
             PayLoad = "";
         }
     }
+    struct rarmessage
+    {
+        public string rarpath;
+        public string wid;
+    }
     class Program
     {
-        public static Queue<string> rarqueue = new Queue<string>();
+        public static string currentwid = "";
+        public static Queue<rarmessage> rarqueue = new Queue<rarmessage>();
         //public static ManualResetEvent evtObj = new ManualResetEvent(false);
         public static AutoResetEvent evtObj = new AutoResetEvent(false);
         static int Main(string[] args)
@@ -127,8 +133,9 @@ namespace ControlServer
                 Thread.Sleep(1000);               
                 if (rarqueue.Count > 0)
                 {
-                    string newrar = rarqueue.Dequeue();
-                    HttpclientHelper.httpget(newrar, (ref string str, ref byte[] bytearray) => {
+                    rarmessage newrar = rarqueue.Dequeue();
+                    currentwid = newrar.wid;
+                    HttpclientHelper.httpget(newrar.rarpath, (ref string str, ref byte[] bytearray) => {
                         string path = AppDomain.CurrentDomain.BaseDirectory;
                         path += "x.rar";
                         path = @"F:\uev";//\Content;

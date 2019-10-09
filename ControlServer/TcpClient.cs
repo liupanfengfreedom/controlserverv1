@@ -186,17 +186,34 @@ namespace ControlServer
                         string ioskey = "works/" + iosmd5;
                         client.PutObject(bucketName, ioskey, iospaksfilepath);
 
-                        string remotehttpserver = "http://192.168.1.174:8080/";
+                        string remotehttpserver = "http://192.168.1.174:8080/api/pakCallback";
                         var payload = new Dictionary<string, string>
                         {
-                          {"wid","null"},
+                          {"wid",Program.currentwid},
                           {"assetpath", mp.PayLoad},
-                          {"android_pak", bucketName+"/"+androidkey},
-                          {"ios_pak", bucketName+"/"+ioskey}
+                          {"android_pak", androidkey},
+                          {"ios_pak", ioskey}
                         };
                         string strPayload = JsonConvert.SerializeObject(payload);
                         HttpContent httpContent = new StringContent(strPayload, Encoding.UTF8, "application/json");
-                        //HttpclientHelper.httppost(remotehttpserver, httpContent);
+                        int retrycounter = 0;
+ retry:
+                        int shouldretry=0;
+                        HttpclientHelper.httppost(remotehttpserver, httpContent, (ref string strparameter, ref byte[] bytearray) => {
+                            if (!String.IsNullOrEmpty(strparameter))
+                            {
+                                if (!strparameter.Contains("\"code\":200"))
+                                {
+                                    shouldretry = 1;
+                                    retrycounter++;
+                                }
+                            }
+                        });
+                        if (shouldretry == 1&& retrycounter<10)
+                        {
+                            Thread.Sleep(2000);
+                            goto retry;
+                        }
                         Program.evtObj.Set();
                         OnClientExit();
                         break;
