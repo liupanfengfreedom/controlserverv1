@@ -205,7 +205,7 @@ retry:
                             window_file_log.Log(strparameter);
                             if (!String.IsNullOrEmpty(strparameter))
                             {
-                                if (!strparameter.Contains("\"code\":200"))
+                                if (!strparameter.Contains("\"data\":true"))
                                 {
                                     shouldretry = 1;
                                     retrycounter++;
@@ -214,7 +214,7 @@ retry:
                         });
                         if (shouldretry == 1&& retrycounter<10)
                         {
-                            Thread.Sleep(2000);
+                            Thread.Sleep(1000*60*10);
                             goto retry;
                         }
                         Program.evtObj.Set();

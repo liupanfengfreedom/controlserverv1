@@ -1,0 +1,17 @@
+log begin
+..............
+2019/10/10 11:04:30 :  mmessage.rarpath :http://coresnow-circle.oss-cn-hangzhou.aliyuncs.com/works/ddee3d93b7ce48d9aa98850dfbabae82.rar?Expires=1570680269&OSSAccessKeyId=LTAIhCY2qLcYpbN2&Signature=IXjyaQgU6bPrWpzkrrfDx25CHuY%3D
+2019/10/10 11:04:30 :  mmessage.wid :5d9e9fbd7d2c95227c4aec95
+2019/10/10 11:05:12 : retrycounter :0
+2019/10/10 11:05:12 : {"wid":"5d9e9fbd7d2c95227c4aec95","assetpath":"SkeletalMesh'/Game/VehicleAdv/Vehicle/Vehicle_SkelMesh.Vehicle_SkelMesh'","android_pak":"works/2b213865-1d3b-489e-960a-e1f302ad5aa4.pak","ios_pak":"works/7d54bf96-a984-4531-825d-44e6857b4f4f.pak"}
+2019/10/10 11:05:13 : {"code":200,"msg":null,"data":true}
+2019/10/10 11:10:18 :  mmessage.rarpath :http://coresnow-circle.oss-cn-hangzhou.aliyuncs.com/works/0ab0bcd4bb8149abadaa4678109ddf6b.rar?Expires=1570680617&OSSAccessKeyId=LTAIhCY2qLcYpbN2&Signature=%2FvRVDwuQhT7XzLflNt0ukKRrRFY%3D
+2019/10/10 11:10:18 :  mmessage.wid :5d9ea1197d2c95227c4aec96
+2019/10/10 11:10:21 :  mmessage.rarpath :http://coresnow-circle.oss-cn-hangzhou.aliyuncs.com/works/74044c74a0834c13bdcc68c7fac15caa.rar?Expires=1570680619&OSSAccessKeyId=LTAIhCY2qLcYpbN2&Signature=i%2FVouDYwfFfhRRfEf%2FxS%2B9kxQtY%3D
+2019/10/10 11:10:21 :  mmessage.wid :5d9ea11b7d2c95227c4aec97
+2019/10/10 11:10:53 : retrycounter :0
+2019/10/10 11:10:53 : {"wid":"5d9ea1197d2c95227c4aec96","assetpath":"SkeletalMesh'/Game/VehicleAdv/Vehicle/Vehicle_SkelMesh.Vehicle_SkelMesh'","android_pak":"works/aa1f2ab2-48f2-4f67-8844-0b0307d66992.pak","ios_pak":"works/e3e48e59-6df6-4339-96c8-854a61d1c7ef.pak"}
+2019/10/10 11:10:53 : {"code":200,"msg":null,"data":true}
+2019/10/10 11:11:28 : retrycounter :0
+2019/10/10 11:11:28 : {"wid":"5d9ea11b7d2c95227c4aec97","assetpath":"SkeletalMesh'/Game/VehicleAdv/Vehicle/Vehicle_SkelMesh.Vehicle_SkelMesh'","android_pak":"works/6c1664c4-19a6-46b7-acd3-1a7b2983d5a3.pak","ios_pak":"works/25bc7301-1980-463a-819b-0d265e2c8d82.pak"}
+2019/10/10 11:11:28 : {"code":200,"msg":null,"data":true}

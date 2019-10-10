@@ -142,7 +142,7 @@ namespace ControlServer
                         Utility.SubDirectoryDelete(path + "/Content");
                         //Thread.Sleep(5000);
                         File.WriteAllBytes(path + "/Saved/x.rar", bytearray);
-                        Console.WriteLine("writefileok");
+                        Console.WriteLine("writefileok :"+ bytearray.Length);
                         //Thread.Sleep(5000);
                         string apppath = @"E:\Program Files\7-Zip\7zG.exe";
                         string passArguments = "x F:/uev/Saved/x.rar -oF:/uev/Content";
