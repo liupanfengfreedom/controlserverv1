@@ -1,0 +1,7 @@
+log begin
+..............
+2019/10/11 17:48:20 :  mmessage.rarpath :works/f9f0623d2f4b4071abe8b8a357b3232b.rar
+2019/10/11 17:48:20 :  mmessage.wid :5da04fe47d2c95232c105bb9
+2019/10/11 17:49:48 : retrycounter :0
+2019/10/11 17:49:48 : {"wid":"5da04fe47d2c95232c105bb9","assetpath":"SkeletalMesh'/Game/VehicleAdv/Vehicle/Vehicle_SkelMesh.Vehicle_SkelMesh'","android_pak":"works/dbe64809-6a90-4df5-90c8-c0907f695fe5.pak","ios_pak":"works/80ca8fb7-ad18-4742-88c6-ee7e7b06e570.pak"}
+2019/10/11 17:49:48 : {"code":200,"msg":null,"data":true}

@@ -1,0 +1,9 @@
+log begin
+..............
+2019/10/10 19:29:51 :  mmessage.rarpath :http://coresnow-circle.oss-cn-hangzhou.aliyuncs.com/works/ff930afa6697419da21954941e9ba1e7.rar?Expires=1570710182&OSSAccessKeyId=LTAIhCY2qLcYpbN2&Signature=hCnkh%2FVy2Ugcrqhb9LlTxyrwFzg%3D
+2019/10/10 19:29:51 :  mmessage.wid :5d9f14967d2c950d8c39d1f6
+2019/10/10 19:30:31 : retrycounter :0
+2019/10/10 19:30:31 : {"wid":"5d9f14967d2c950d8c39d1f6","assetpath":"SkeletalMesh'/Game/VehicleAdv/Vehicle/Vehicle_SkelMesh.Vehicle_SkelMesh'","android_pak":"works/1a48e3a7-cc0b-465e-bfc2-34bc44948863.pak","ios_pak":"works/7ab31e31-da53-4700-8a47-f16e6a266211.pak"}
+2019/10/10 19:30:31 : {"code":200,"msg":null,"data":true}
+2019/10/11 17:30:43 :  mmessage.rarpath :adss
+2019/10/11 17:30:43 :  mmessage.wid :aaa

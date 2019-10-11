@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define OSSDOWNLOAD 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ using System.Diagnostics;
 using System.IO.Compression;
 using System.IO;
 using System.Net.Sockets;
+using Aliyun.OSS.Samples;
+using Aliyun.OSS;
 namespace ControlServer
 {
     enum MessageType
@@ -135,6 +138,44 @@ namespace ControlServer
                 {
                     rarmessage newrar = rarqueue.Dequeue();
                     currentwid = newrar.wid;
+#if OSSDOWNLOAD
+                    OssClient client = new OssClient(Config.Endpoint, Config.AccessKeyId, Config.AccessKeySecret);
+                    const string bucketName = "coresnow-circle";
+                    var result = client.GetObject(bucketName, newrar.rarpath);
+                    using (var requestStream = result.Content)
+                    {
+                        string path = @"F:\uev";//\Content;
+                        Utility.SubDirectoryDelete(path + "/Content");
+                        using (var fs = File.Open(path + "/Saved/x.rar", FileMode.Create))
+                        {
+                            int length = 4 * 1024;
+                            var buf = new byte[length];
+                            do
+                            {
+                                length = requestStream.Read(buf, 0, length);
+                                fs.Write(buf, 0, length);
+                            } while (length != 0);
+                        }
+                        Console.WriteLine("writefileok :" + result.ContentLength);
+                        string apppath = @"E:\Program Files\7-Zip\7zG.exe";
+                        string passArguments = "x F:/uev/Saved/x.rar -oF:/uev/Content";
+                        Process z7p = Utility.CommandRun(apppath, passArguments);
+                        z7p.WaitForExit();
+
+                        IPAddress ipAd = IPAddress.Parse("192.168.1.240");
+                        TcpListener myList = new TcpListener(ipAd, 8003);
+                        myList.Start();
+                        string projectpath = @"F:\uev/pro422.uproject";
+                        string Arguments = "";
+                        projectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
+                        Arguments = @"F:\uev/pro422.uproject";
+                        Process mpro = Utility.CommandRun(projectpath, Arguments);
+                        Socket st = myList.AcceptSocket();
+                        TCPClient tcpClient = new TCPClient(st);
+                        tcpClient.mtcplistener = myList;
+                        tcpClient.mprocess = mpro;
+                    }
+#else
                     HttpclientHelper.httpget(newrar.rarpath, (ref string str, ref byte[] bytearray) => {
                         string path = AppDomain.CurrentDomain.BaseDirectory;
                         path += "x.rar";
@@ -162,6 +203,7 @@ namespace ControlServer
                         tcpClient.mtcplistener = myList;
                         tcpClient.mprocess = mpro;
                     });
+#endif
                     evtObj.WaitOne();
                 }
             }
