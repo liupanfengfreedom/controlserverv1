@@ -93,7 +93,7 @@ namespace ControlServer
         static void httpserverthread()
         {
             //string[] prefixes = { "http://localhost:7000/", "http://192.168.1.240:7000/" };
-            string[] prefixes = {"http://192.168.1.240:7000/" };
+            string[] prefixes = {"http://192.168.1.240:7000/" };//host http serer
             if (!HttpListener.IsSupported)
             {
                 Console.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
