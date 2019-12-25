@@ -65,8 +65,8 @@ namespace ControlServer
 
                 HttpListenerResponse response = mhttplistenercontext.Response;
                 // Construct a response.
-                string responseString = "<HTML><BODY> Hello world!</BODY></HTML>";
-                responseString += utfString;
+                string responseString = "success";
+                //responseString += utfString;
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
                 // Get a response stream and write the response to it.
                 response.ContentLength64 = buffer.Length;

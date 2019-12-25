@@ -15,4 +15,3 @@ E:\VsProjects\controlserverv1\sdk\obj\Debug\aliyun-oss-sdk.csproj.GenerateResour
 E:\VsProjects\controlserverv1\sdk\obj\Debug\aliyun-oss-sdk.csproj.CoreCompileInputs.cache
 E:\VsProjects\controlserverv1\sdk\obj\Debug\Aliyun.OSS.dll
 E:\VsProjects\controlserverv1\sdk\obj\Debug\Aliyun.OSS.pdb
-E:\VsProjects\controlserverv1\sdk\obj\Debug\aliyun-oss-sdk.csprojAssemblyReference.cache

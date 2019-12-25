@@ -1,0 +1,12 @@
+log begin
+..............
+2019/10/25 14:54:58 :  mmessage.rarpath :works/70452a6b34344cf7b7151d8e96ca428c.rar
+2019/10/25 14:54:58 :  mmessage.wid :5db29c425df01d3dce0a49e3
+2019/10/25 15:07:49 : retrycounter :0
+2019/10/25 15:07:49 : {"result":"success","reason":"","wid":"5db29c425df01d3dce0a49e3","assetpath":"SkeletalMesh'/Game/VehicleAdv/Vehicle/Vehicle_SkelMesh.Vehicle_SkelMesh'","android_pak":"works/4fb110d8-393f-47f0-b46d-dead0b6f4392.pak","ios_pak":"works/c827d905-45b2-42c0-85d3-cf19c45b5b42.pak"}
+2019/10/25 15:07:49 : {"code":200,"msg":null,"data":true}
+2019/10/25 16:56:49 :  mmessage.rarpath :works/d43d51c4f85e44b0a355848fad7906a4.rar
+2019/10/25 16:56:49 :  mmessage.wid :5db2b8d15df01d49d81ace08
+2019/10/25 17:07:32 : retrycounter :0
+2019/10/25 17:07:32 : {"result":"success","reason":"","wid":"5db2b8d15df01d49d81ace08","assetpath":"StaticMesh'/Game/NSH/Bulid/Deng/deng_001_01.deng_001_01'","android_pak":"works/723705e4-9b25-4b07-9d4b-be8f969b6bb0.pak","ios_pak":"works/941c0e8c-2a28-4d14-84ec-20ecdb06e551.pak"}
+2019/10/25 17:07:32 : {"code":200,"msg":null,"data":true}

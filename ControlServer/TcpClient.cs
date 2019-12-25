@@ -20,7 +20,7 @@ namespace ControlServer
     public delegate void OnFileReceivedCompleted(ref String content);
     class TCPClient
     {
-        string remotehttpserver = "http://192.168.1.174:8080/api/pakCallback";//remote http server;
+        //string remotehttpserver = "http://192.168.1.174:8080/api/pakCallback";//remote http server;
         /// <summary>
         /// //////////////////////////////////////////////
         /// </summary>
@@ -145,35 +145,37 @@ namespace ControlServer
                             }
                             //content copy begin
                             string sourcepath = @"F:\uev\Content";
-                            string despath = @"F:\UE4projects\bplab\Content";
+                            sourcepath = Program.signidpropath + "/Content";
+                            string despath = Program.packagpropath + "/Content";
+
                             Utility.SubDirectoryDelete(despath);
                             Utility.DirectoryCopy(sourcepath, despath, true);
                             //content copy end
                             //delete old data begin
-                            string pakpath = @"F:\UE4projects\bplab\Saved";
+                            string pakpath = Program.packagpropath + "/Saved";
                             Utility.SubDirectoryDelete(pakpath);
                             //delete old data end
 
 
                             //////////////////////////////////////////////////////////////////
                             ////////////////////////cook for Android begin
-                            string path = @"C:\Program Files\Epic Games\UE_4.22\Engine\Build\BatchFiles\RunUAT.bat";
-                            string Arguments = "BuildCookRun -project=F:\\UE4projects/bplab/bplab.uproject  -noP4 -platform=Android -clientconfig=Development -serverconfig=Development -cook -allmaps -stage -pak -archive";
+                            string path = Program.unrealbatchfilepath;
+                            string Arguments = Program.argumentsforandroid;
                             Process tempprocess = Utility.CommandRun(path, Arguments);
                             tempprocess.WaitForExit();
                             /////////////////////////////////////////////////////////////////
                             /////////////////////////cook for Android end
                             //////////////////////////////////////////////////////////////////
                             ////////////////////////cook for ios begin
-                            Arguments = "BuildCookRun -project=F:\\UE4projects/bplab/bplab.uproject  -noP4 -platform=IOS -clientconfig=Development -serverconfig=Development -cook -allmaps -stage -pak -archive";
+                            Arguments = Program.argumentsforios;
                             tempprocess = Utility.CommandRun(path, Arguments);
                             tempprocess.WaitForExit();
                             /////////////////////////////////////////////////////////////////
                             /////////////////////////cook for ios end
 
                             //Console.WriteLine("hi");
-                            string androidpaksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\Android\bplab\Content\Paks/pakchunk1-Android.pak";
-                            string iospaksfilepath = @"F:\UE4projects\bplab\Saved\StagedBuilds\IOS\cookeddata\bplab\content\paks/pakchunk1-ios.pak";
+                            string androidpaksfilepath = Program.packagpropath+ "/Saved/StagedBuilds/Android/InfiniteLife1_0/Content/Paks/pakchunk1-Android.pak";
+                            string iospaksfilepath = Program.packagpropath + "/Saved/StagedBuilds/IOS/cookeddata/infinitelife1_0/content/paks/pakchunk1-ios.pak";
                             Guid g;
                             // Create and display the value of two GUIDs.
                             g = Guid.NewGuid();
@@ -191,8 +193,17 @@ namespace ControlServer
                             client.PutObject(bucketName, ioskey, iospaksfilepath);
                         }
                         Program.evtObj.Set();//next one
+                        string result = "success";
+                        string reason = "";
+                        if (mp.PayLoad == "")
+                        {
+                            result = "failure";
+                            reason = "资产无效";
+                        }
                         var payload = new Dictionary<string, string>
                         {
+                          {"result",result},
+                          {"reason",reason},
                           {"wid",Program.currentwid},
                           {"assetpath", mp.PayLoad},//if this value is null then this asset is invalid
                           {"android_pak", androidkey},
@@ -205,7 +216,7 @@ retry:
                         window_file_log.Log("retrycounter :"+ retrycounter);
                         window_file_log.Log(strPayload);
                         int shouldretry=0;
-                        HttpclientHelper.httppost(remotehttpserver, httpContent, (ref string strparameter, ref byte[] bytearray) => {
+                        HttpclientHelper.httppost(Program.remotehttpserver, httpContent, (ref string strparameter, ref byte[] bytearray) => {
                             window_file_log.Log(strparameter);
                             if (!String.IsNullOrEmpty(strparameter))
                             {

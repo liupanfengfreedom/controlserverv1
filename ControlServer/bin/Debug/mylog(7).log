@@ -1,0 +1,21 @@
+log begin
+..............
+2019/10/15 15:22:41 :  mmessage.rarpath :aaaaaaaaaaaaaaaaaaaaa
+2019/10/15 15:22:41 :  mmessage.wid :aaaaaaaaaaaaaa
+2019/10/15 15:23:51 :  mmessage.rarpath :Aliyun.OSS.Common.OssException: The specified key does not exist.
+   在 Aliyun.OSS.Common.Handlers.ErrorResponseHandler.ErrorHandle(ServiceResponse response) 位置 E:\VsProjects\controlserverv1\sdk\Common\Handlers\ErrorResponseHandler.cs:行号 69
+   在 Aliyun.OSS.Common.Handlers.ErrorResponseHandler.Handle(ServiceResponse response) 位置 E:\VsProjects\controlserverv1\sdk\Common\Handlers\ErrorResponseHandler.cs:行号 29
+   在 Aliyun.OSS.Common.Communication.ServiceClient.HandleResponse(ServiceResponse response, IEnumerable`1 handlers) 位置 E:\VsProjects\controlserverv1\sdk\Common\Communication\ServiceClient.cs:行号 115
+   在 Aliyun.OSS.Common.Communication.ServiceClient.Send(ServiceRequest request, ExecutionContext context) 位置 E:\VsProjects\controlserverv1\sdk\Common\Communication\ServiceClient.cs:行号 65
+   在 Aliyun.OSS.Common.Communication.RetryableServiceClient.SendImpl(ServiceRequest request, ExecutionContext context, Int32 retryTimes) 位置 E:\VsProjects\controlserverv1\sdk\Common\Communication\RetryableServiceClient.cs:行号 78
+   在 Aliyun.OSS.Common.Communication.RetryableServiceClient.Send(ServiceRequest request, ExecutionContext context) 位置 E:\VsProjects\controlserverv1\sdk\Common\Communication\RetryableServiceClient.cs:行号 53
+   在 Aliyun.OSS.Commands.OssCommand.Execute() 位置 E:\VsProjects\controlserverv1\sdk\Commands\OssCommand.cs:行号 90
+   在 Aliyun.OSS.Commands.OssCommand`1.Execute() 位置 E:\VsProjects\controlserverv1\sdk\Commands\OssCommand.cs:行号 160
+   在 Aliyun.OSS.OssClient.GetObject(GetObjectRequest getObjectRequest) 位置 E:\VsProjects\controlserverv1\sdk\OssClient.cs:行号 1033
+   在 Aliyun.OSS.OssClient.GetObject(String bucketName, String key) 位置 E:\VsProjects\controlserverv1\sdk\OssClient.cs:行号 1015
+   在 ControlServer.Program.convertthreadwork() 位置 E:\VsProjects\controlserverv1\ControlServer\Program.cs:行号 149
+2019/10/15 15:23:55 : retrycounter :0
+2019/10/15 15:23:55 : {"result":"failure","reason":"","wid":"aaaaaaaaaaaaaa"}
+2019/10/15 15:24:11 :  mmessage.rarpath :aaaaaaaaaaaaaaaaaaaaa
+2019/10/15 15:24:11 :  mmessage.wid :aaaaaaaaaaaaaa
+2019/10/15 15:24:13 : {"code":400,"msg":"reason空值","data":null}
