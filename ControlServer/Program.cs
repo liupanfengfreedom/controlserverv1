@@ -35,26 +35,29 @@ namespace ControlServer
     struct rarmessage
     {
         public string rarpath;
-        public string wid;
+        public string mid;
     }
     class Program
     {
         public static string signidpropath = @"C:\uev";
-        public static string unrealprojectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
+        public static string unrealprojectpath = @"C:\Program Files\Epic Games\UE_4.23\Engine\Binaries\Win64/UE4Editor.exe";
         public static string projectshouldlaunched = @"C:\uev/pro422.uproject";
-        public static string packagpropath = @"C:\InfiniteLife1_0";
-        public static string unrealbatchfilepath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Build\BatchFiles\RunUAT.bat";
-        public static string argumentsforandroid = "BuildCookRun -project=C:\\InfiniteLife1_0/InfiniteLife1_0.uproject  -noP4 -platform=Android -clientconfig=Development -serverconfig=Development -cook -allmaps -Compressed -build -stage -pak -archive";
-        public static string argumentsforios = "BuildCookRun -project=C:\\InfiniteLife1_0/InfiniteLife1_0.uproject  -noP4 -platform=IOS -clientconfig=Development -serverconfig=Development -cook -allmaps -Compressed -build -stage -pak -archive";
+        public static string packagpropath_android = @"C:\package_android/InfiniteLife1_0";
+        public static string packagpropath_ios = @"C:\package_ios/InfiniteLife1_0";
+        public static string unrealbatchfilepath = @"C:\Program Files\Epic Games\UE_4.23\Engine\Build\BatchFiles\RunUAT.bat";
+        public static string argumentsforandroid = "BuildCookRun -project=C:\\package_android/InfiniteLife1_0/InfiniteLife1_0.uproject  -noP4 -platform=Android -clientconfig=Development -serverconfig=Development -cook -allmaps -Compressed -build -stage -pak -archive";
+        public static string argumentsforios = "BuildCookRun -project=C:\\package_ios/InfiniteLife1_0/InfiniteLife1_0.uproject  -noP4 -platform=IOS -clientconfig=Development -serverconfig=Development -cook -allmaps -Compressed -build -stage -pak -archive";
 
 
 
 
         public static string zip7app = @"C:\Program Files\7-Zip\7zG.exe";
         public static string zip7appargument = "x C:/uev/Saved/x.rar -oC:/uev/Content";
-        public static string tcplocal = "172.16.5.186";
-        public static string httpserver = "http://172.16.5.186:7000/";
+        public static string tcplocal = "172.16.5.188";
+        public static string httpserver = "http://172.16.5.188:7000/";
+
         public static string remotehttpserver = "http://172.16.11.32:8080/api4site/pakCallback";//remote http server;
+
         public static string currentwid = "";
         public static Queue<rarmessage> rarqueue = new Queue<rarmessage>();
         //public static ManualResetEvent evtObj = new ManualResetEvent(false);
@@ -121,8 +124,8 @@ namespace ControlServer
         {
             //string[] prefixes = { "http://172.16.5.186:7000/" };           
 
-            //string[] prefixes = { httpserver };//host http serer
-            string[] prefixes = { "http://localhost:7000/" };//host http serer
+            string[] prefixes = { httpserver };//host http serer
+            //string[] prefixes = { "http://localhost:7000/" };//host http serer
             if (!HttpListener.IsSupported)
             {
                 Console.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
@@ -135,7 +138,7 @@ namespace ControlServer
 
             // Create a listener.
             HttpListener listener = new HttpListener();
-            // Add the prefixes.
+            // Add the prefixes. 
             foreach (string s in prefixes)
             {
                 listener.Prefixes.Add(s);
@@ -166,7 +169,7 @@ namespace ControlServer
                 if (rarqueue.Count > 0)
                 {
                     rarmessage newrar = rarqueue.Dequeue();
-                    currentwid = newrar.wid;
+                    currentwid = newrar.mid;
 #if OSSDOWNLOAD
                     OssClient client = new OssClient(Config.Endpoint, Config.AccessKeyId, Config.AccessKeySecret);
                     const string bucketName = "coresnow-circle";
@@ -220,7 +223,7 @@ namespace ControlServer
                         {
                           {"result","failure"},
                           {"reason","访问的RAR文件不存在"},
-                          {"wid",Program.currentwid},
+                          {"mid",Program.currentwid},
                         };
                         string strPayload = JsonConvert.SerializeObject(payload);
                         HttpContent httpContent = new StringContent(strPayload, Encoding.UTF8, "application/json");
@@ -246,7 +249,7 @@ retry:
                             goto retry;
                         }
                     }
-#else
+#else //httpdownload
                     HttpclientHelper.httpget(newrar.rarpath, (ref string str, ref byte[] bytearray) => {
                         string path = AppDomain.CurrentDomain.BaseDirectory;
                         path += "x.rar";

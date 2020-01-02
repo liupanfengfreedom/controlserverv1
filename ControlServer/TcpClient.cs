@@ -136,27 +136,28 @@ namespace ControlServer
                     case MessageType.ASSIGNOK:
                         string androidkey = "";
                         string ioskey = "";
-                        if (mp.PayLoad != "")
-                        {                        
-                            Thread.Sleep(6000);
-                            if (mprocess!=null&&!mprocess.HasExited)
-                            {
-                                mprocess.Kill();
-                            }
+                        string result = "success";
+                        string reason = "";
+                        Thread.Sleep(6000);
+                        if (mprocess != null && !mprocess.HasExited)
+                        {
+                            mprocess.Kill();
+                        }
+                        if (mp.PayLoad != ""&& mp.PayLoad != "None")
+                        {
                             //content copy begin
                             string sourcepath = @"F:\uev\Content";
                             sourcepath = Program.signidpropath + "/Content";
-                            string despath = Program.packagpropath + "/Content";
-
+                            ////////////////////////////////////////////////////////////////////////
+                            ///////////////////////////////resource prepare for android
+                            string despath = Program.packagpropath_android + "/Content";
                             Utility.SubDirectoryDelete(despath);
                             Utility.DirectoryCopy(sourcepath, despath, true);
                             //content copy end
                             //delete old data begin
-                            string pakpath = Program.packagpropath + "/Saved";
+                            string pakpath = Program.packagpropath_android + "/Saved";
                             Utility.SubDirectoryDelete(pakpath);
                             //delete old data end
-
-
                             //////////////////////////////////////////////////////////////////
                             ////////////////////////cook for Android begin
                             string path = Program.unrealbatchfilepath;
@@ -165,6 +166,15 @@ namespace ControlServer
                             tempprocess.WaitForExit();
                             /////////////////////////////////////////////////////////////////
                             /////////////////////////cook for Android end
+                            ////////////////////////////////////////////////////////////////////////
+                            ///////////////////////////////resource prepare for ios
+                            despath = Program.packagpropath_ios + "/Content";
+                            Utility.SubDirectoryDelete(despath);
+                            Utility.DirectoryCopy(sourcepath, despath, true);
+                            //content copy end
+                            //delete old data begin
+                            pakpath = Program.packagpropath_ios + "/Saved";
+                            Utility.SubDirectoryDelete(pakpath);
                             //////////////////////////////////////////////////////////////////
                             ////////////////////////cook for ios begin
                             Arguments = Program.argumentsforios;
@@ -174,37 +184,36 @@ namespace ControlServer
                             /////////////////////////cook for ios end
 
                             //Console.WriteLine("hi");
-                            string androidpaksfilepath = Program.packagpropath+ "/Saved/StagedBuilds/Android/InfiniteLife1_0/Content/Paks/pakchunk1-Android.pak";
-                            string iospaksfilepath = Program.packagpropath + "/Saved/StagedBuilds/IOS/cookeddata/infinitelife1_0/content/paks/pakchunk1-ios.pak";
+                            string androidpaksfilepath = Program.packagpropath_android + "/Saved/StagedBuilds/Android/InfiniteLife1_0/Content/Paks/pakchunk1-Android.pak";
+                            string iospaksfilepath = Program.packagpropath_ios + "/Saved/StagedBuilds/IOS/cookeddata/infinitelife1_0/content/paks/pakchunk1-ios.pak";
                             Guid g;
                             // Create and display the value of two GUIDs.
                             g = Guid.NewGuid();
                             string guidstring = g.ToString();
-                            string androidmd5 = guidstring+".pak";
+                            string androidguid = guidstring + ".pak";
                             g = Guid.NewGuid();
                             guidstring = g.ToString();
-                            string iosmd5 = guidstring + ".pak";
+                            string iosguid = guidstring + ".pak";
                             OssClient client = new OssClient(Config.Endpoint, Config.AccessKeyId, Config.AccessKeySecret);
                             const string bucketName = "coresnow-circle";
-                            string key = "yourfolder/"+ androidmd5;
-                            androidkey = "works/"+ androidmd5;
+                            androidkey = "model/" + androidguid;
                             client.PutObject(bucketName, androidkey, androidpaksfilepath);
-                            ioskey = "works/" + iosmd5;
+                            ioskey = "model/" + iosguid;
                             client.PutObject(bucketName, ioskey, iospaksfilepath);
+                            result = "success";
+                            reason = "";
                         }
-                        Program.evtObj.Set();//next one
-                        string result = "success";
-                        string reason = "";
-                        if (mp.PayLoad == "")
+                        else
                         {
                             result = "failure";
                             reason = "资产无效";
                         }
+                        Program.evtObj.Set();//next one
                         var payload = new Dictionary<string, string>
                         {
                           {"result",result},
                           {"reason",reason},
-                          {"wid",Program.currentwid},
+                          {"mid",Program.currentwid},
                           {"assetpath", mp.PayLoad},//if this value is null then this asset is invalid
                           {"android_pak", androidkey},
                           {"ios_pak", ioskey}

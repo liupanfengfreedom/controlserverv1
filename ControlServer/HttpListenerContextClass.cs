@@ -36,28 +36,47 @@ namespace ControlServer
                 
                 System.Collections.Specialized.NameValueCollection header = request.Headers;
                 string[] headerallkeys = header.AllKeys;
-                string wid = "";
+                string mid = "";
+                string rarpath = "";
                 foreach (var a in headerallkeys)
                 {
-                    if (a.Equals("wid"))
+                    if (a.Equals("mid"))
                     {
                         string[] values = header.GetValues(a);
-                        wid = values[0];
+                        mid = values[0];
+                        window_file_log.Log(" 0mmessage.mid :" + mid);
                     }
-                }
-                foreach (var a in headerallkeys)
-                {
-                    if (a.Equals("rarPath"))//
+                    else if (a.Equals("rarPath"))//
                     {
                         string[] values = header.GetValues(a);
-                        rarmessage mmessage;
-                        mmessage.rarpath = values[0];
-                        mmessage.wid = wid;
-                        window_file_log.Log(" mmessage.rarpath :" + mmessage.rarpath);
-                        window_file_log.Log(" mmessage.wid :" + mmessage.wid);
-                        Program.rarqueue.Enqueue(mmessage);      
+                        rarpath = values[0];
+                        window_file_log.Log(" 0mmessage.rarpath :" + rarpath);
+                    }
+                    else if (a.Equals("pakCallbackUrl"))//
+                    {
+                        string[] values = header.GetValues(a);
+                        Program.remotehttpserver = values[0];              
                     }
                 }
+                rarmessage mmessage;
+                mmessage.rarpath = rarpath;
+                mmessage.mid = mid;
+                window_file_log.Log(" mmessage.rarpath :" + mmessage.rarpath);
+                window_file_log.Log(" mmessage.mid :" + mmessage.mid);
+                Program.rarqueue.Enqueue(mmessage);
+                //foreach (var a in headerallkeys)
+                //{
+                //    if (a.Equals("rarPath"))//
+                //    {
+                //        string[] values = header.GetValues(a);
+                //        rarmessage mmessage;
+                //        mmessage.rarpath = values[0];
+                //        mmessage.mid = mid;
+                //        window_file_log.Log(" mmessage.rarpath :" + mmessage.rarpath);
+                //        window_file_log.Log(" mmessage.mid :" + mmessage.mid);
+                //        Program.rarqueue.Enqueue(mmessage);      
+                //    }
+                //}
                 System.IO.Stream input = request.InputStream;
                 byte[] array = new byte[request.ContentLength64];
                 input.Read(array, 0, (int)request.ContentLength64);//larg file may encounter error
