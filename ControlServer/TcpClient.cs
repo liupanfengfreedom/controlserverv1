@@ -1,4 +1,5 @@
 ﻿#define UTF16
+//#define OSSUPLOAD
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -182,7 +183,8 @@ namespace ControlServer
                             tempprocess.WaitForExit();
                             /////////////////////////////////////////////////////////////////
                             /////////////////////////cook for ios end
-
+                            #region upload pak 
+#if OSSUPLOAD
                             //Console.WriteLine("hi");
                             string androidpaksfilepath = Program.packagpropath_android + "/Saved/StagedBuilds/Android/InfiniteLife1_0/Content/Paks/pakchunk1-Android.pak";
                             string iospaksfilepath = Program.packagpropath_ios + "/Saved/StagedBuilds/IOS/cookeddata/infinitelife1_0/content/paks/pakchunk1-ios.pak";
@@ -202,6 +204,42 @@ namespace ControlServer
                             client.PutObject(bucketName, ioskey, iospaksfilepath);
                             result = "success";
                             reason = "";
+#else
+                            string androidpaksfilepath = Program.packagpropath_android + "/Saved/StagedBuilds/Android/InfiniteLife1_0/Content/Paks/pakchunk1-Android.pak";
+                            string iospaksfilepath = Program.packagpropath_ios + "/Saved/StagedBuilds/IOS/cookeddata/infinitelife1_0/content/paks/pakchunk1-ios.pak";
+                            Guid g;
+                            // Create and display the value of two GUIDs.
+                            g = Guid.NewGuid();
+                            string guidstring = g.ToString();
+                            string androidguid = guidstring + ".pak";
+                            g = Guid.NewGuid();
+                            guidstring = g.ToString();
+                            string iosguid = guidstring + ".pak";
+                            string androidanimationpath = Program.fileserverlocation+"/animation/"+ androidguid;
+                            string iosanimationpath = Program.fileserverlocation+"/animation/"+ iosguid;
+                            System.IO.File.Move(androidpaksfilepath, androidanimationpath);
+                            System.IO.File.Move(iospaksfilepath, iosanimationpath);
+                            string androidanimationdownloadpath = Program.fileserverpath + "/animation/" + androidguid;
+                            string iosanimationdownloadpath = Program.fileserverpath + "/animation/" + iosguid;
+                            MySQLOperation msqlo = MySQLOperation.getinstance();
+                            Dictionary<String, String> value;
+                            string cmd;
+                            cmd = String.Format(
+                            "INSERT INTO {0}(picturepath,ueassetpath,androidpakfilename,iospakfilename,animationpakpath_android,animationpakpath_ios) " +
+                            "VALUES(@picturepath,@ueassetpath,@androidpakfilename,@iospakfilename,@animationpakpath_android,@animationpakpath_ios)", Program.useranimationtablename
+                            );
+                            value = new Dictionary<string, string>();
+                            value.Add("@picturepath", "somepath");
+                            value.Add("@ueassetpath", mp.PayLoad);
+                            value.Add("@androidpakfilename", androidguid);
+                            value.Add("@iospakfilename", iosguid);
+                            value.Add("@animationpakpath_android", androidanimationdownloadpath);
+                            value.Add("@animationpakpath_ios", iosanimationdownloadpath);
+                            msqlo.add(cmd, value);
+#endif
+
+                            #endregion
+
                         }
                         else
                         {
@@ -209,14 +247,16 @@ namespace ControlServer
                             reason = "资产无效";
                         }
                         Program.evtObj.Set();//next one
+#region report upload result
+                        /*
                         var payload = new Dictionary<string, string>
                         {
-                          {"result",result},
-                          {"reason",reason},
-                          {"mid",Program.currentwid},
-                          {"assetpath", mp.PayLoad},//if this value is null then this asset is invalid
-                          {"android_pak", androidkey},
-                          {"ios_pak", ioskey}
+                            {"result",result},
+                            {"reason",reason},
+                            {"mid",Program.currentwid},
+                            {"assetpath", mp.PayLoad},//if this value is null then this asset is invalid
+                            {"android_pak", androidkey},
+                            {"ios_pak", ioskey}
                         };
                         string strPayload = JsonConvert.SerializeObject(payload);
                         HttpContent httpContent = new StringContent(strPayload, Encoding.UTF8, "application/json");
@@ -241,6 +281,8 @@ retry:
                             Thread.Sleep(1000*60*10);
                             goto retry;
                         }
+                        */
+#endregion
                         //Program.evtObj.Set();
                         OnClientExit();
                         break;

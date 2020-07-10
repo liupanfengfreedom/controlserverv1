@@ -10,3 +10,15 @@ E:\VsProjects\controlserverv1\sdk\obj\Release\aliyun-oss-sdk.csproj.CoreCompileI
 E:\VsProjects\controlserverv1\sdk\obj\Release\Aliyun.OSS.dll
 E:\VsProjects\controlserverv1\sdk\obj\Release\Aliyun.OSS.pdb
 E:\VsProjects\controlserverv1\sdk\obj\Release\aliyun-oss-sdk.csprojAssemblyReference.cache
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\bin\Release\Aliyun.OSS.XML
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\bin\Release\Aliyun.OSS.dll
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\bin\Release\Aliyun.OSS.pdb
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\bin\Release\Aliyun.OSS.dll.CodeAnalysisLog.xml
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\bin\Release\Aliyun.OSS.dll.lastcodeanalysissucceeded
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Release\aliyun-oss-sdk.csprojAssemblyReference.cache
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Release\Aliyun.OSS.Domain.OssResources.resources
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Release\Aliyun.OSS.Properties.Resources.resources
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Release\aliyun-oss-sdk.csproj.GenerateResource.cache
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Release\aliyun-oss-sdk.csproj.CoreCompileInputs.cache
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Release\Aliyun.OSS.dll
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Release\Aliyun.OSS.pdb

@@ -1,4 +1,4 @@
-﻿#define OSSDOWNLOAD 
+﻿//#define OSSDOWNLOAD 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,22 +39,30 @@ namespace ControlServer
     }
     class Program
     {
-        public static string signidpropath = @"C:\uev";
+        public static Config config = new Config();
+        public static string signidpropath = @"C:\UEprojects\UEeditor";      
         public static string unrealprojectpath = @"C:\Program Files\Epic Games\UE_4.23\Engine\Binaries\Win64/UE4Editor.exe";
-        public static string projectshouldlaunched = @"C:\uev/pro422.uproject";
+        public static string projectshouldlaunched = @"C:\UEprojects\UEeditor/UEeditor.uproject";
         public static string packagpropath_android = @"C:\package_android/InfiniteLife1_0";
         public static string packagpropath_ios = @"C:\package_ios/InfiniteLife1_0";
         public static string unrealbatchfilepath = @"C:\Program Files\Epic Games\UE_4.23\Engine\Build\BatchFiles\RunUAT.bat";
         public static string argumentsforandroid = "BuildCookRun -project=C:\\package_android/InfiniteLife1_0/InfiniteLife1_0.uproject  -noP4 -platform=Android -clientconfig=Development -serverconfig=Development -cook -allmaps -Compressed -build -stage -pak -archive";
         public static string argumentsforios = "BuildCookRun -project=C:\\package_ios/InfiniteLife1_0/InfiniteLife1_0.uproject  -noP4 -platform=IOS -clientconfig=Development -serverconfig=Development -cook -allmaps -Compressed -build -stage -pak -archive";
 
-
+/// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public static string fbxlocation = @"C:\fbxlocation";
+        public static string fileserverlocation = @"D:\xujie";
+        public static string fileserverpath = "http://192.168.20.96:8000/";
+        public static string username = "user1";
+        public static string passworld = "password";
+        public static string useranimationtablename = "animationtable_"+ username;
+        public static string animationundercontent = signidpropath+"\\Content\\skeletonmesh\\animation";
 
 
         public static string zip7app = @"C:\Program Files\7-Zip\7zG.exe";
         public static string zip7appargument = "x C:/uev/Saved/x.rar -oC:/uev/Content";
-        public static string tcplocal = "172.16.5.188";
-        public static string httpserver = "http://172.16.5.188:7000/";
+        public static string tcplocal = "192.168.20.96";
+        public static string httpserver = "http://+:7000/";//"http://192.168.20.96:7000/";
 
         public static string remotehttpserver = "http://172.16.11.32:8080/api4site/pakCallback";//remote http server;
 
@@ -62,8 +70,61 @@ namespace ControlServer
         public static Queue<rarmessage> rarqueue = new Queue<rarmessage>();
         //public static ManualResetEvent evtObj = new ManualResetEvent(false);
         public static AutoResetEvent evtObj = new AutoResetEvent(false);
+        static void databaseinitial()
+        {
+            MySQLOperation msqlo = MySQLOperation.getinstance();
+            String cmd;
+            Dictionary<String, String> value;
+            cmd = String.Format(
+              "SELECT UserName FROM {0} WHERE UserName='{1}'", MySQLOperation.tablebasename, "user1"
+               );
+            bool b = msqlo.find(cmd);
+            if (!b)
+            {
+                //cmd = "INSERT INTO students(name,class) VALUES(@name,@class)";
+                cmd = String.Format(
+                   "INSERT INTO {0}(UserName,PassWord) VALUES(@UserName,@PassWord)", MySQLOperation.tablebasename
+                    );
+                value = new Dictionary<string, string>();
+                value.Add("@UserName", "user1");
+                value.Add("@PassWord", "password");
+                msqlo.add(cmd, value);
+            }
+            string animationtablename = "animationtable_user1";
+            cmd = String.Format(
+                  " UPDATE {0} SET {1} = '{2}' WHERE UserName='{3}'", MySQLOperation.tablebasename, "animationtable", Program.useranimationtablename, "user1"
+                   );
+            msqlo.modify(cmd);
+
+            bool b2 = msqlo.tableeexist(MySQLOperation.databasename, animationtablename);
+            if (!b2)
+            {
+                msqlo.creatanimationtable(MySQLOperation.databasename, animationtablename);
+            }
+
+        }
         static int Main(string[] args)
         {
+            signidpropath = config.configinfor.signidpropath;
+            unrealprojectpath = config.configinfor.unrealprojectpath;
+            projectshouldlaunched = config.configinfor.projectshouldlaunched;
+            packagpropath_android = config.configinfor.packagpropath_android;
+            packagpropath_ios = config.configinfor.packagpropath_ios;
+            unrealbatchfilepath = config.configinfor.unrealbatchfilepath;
+            argumentsforandroid = config.configinfor.argumentsforandroid;
+            argumentsforios = config.configinfor.argumentsforios;
+            fbxlocation = config.configinfor.fbxlocation;
+            fileserverlocation = config.configinfor.fileserverlocation;
+            fileserverpath = config.configinfor.fileserverpath;
+            tcplocal = config.configinfor.tcplocal;
+            ////////////////////////////////////////////////////////////////////
+            databaseinitial();
+            rarmessage mmessage;
+            mmessage.rarpath = "http://192.168.20.96:8000/tmp.fbx";
+            mmessage.mid = "";
+            window_file_log.Log(" mmessage.rarpath :" + mmessage.rarpath);
+            window_file_log.Log(" mmessage.mid :" + mmessage.mid);
+            //Program.rarqueue.Enqueue(mmessage);
 
             //IPAddress ipAd = IPAddress.Parse("192.168.1.240");
             //ipAd = IPAddress.Parse(tcplocal);
@@ -254,23 +315,29 @@ retry:
                         string path = AppDomain.CurrentDomain.BaseDirectory;
                         path += "x.rar";
                         path = @"F:\uev";//\Content;
-                        Utility.SubDirectoryDelete(path + "/Content");
+                        path = fbxlocation;
+                        Utility.SubDirectoryDelete(path);
                         //Thread.Sleep(5000);
-                        File.WriteAllBytes(path + "/Saved/x.rar", bytearray);
+                        string filetowrite = path + "/x.fbx";
+                        File.WriteAllBytes(filetowrite, bytearray);
                         Console.WriteLine("writefileok :"+ bytearray.Length);
                         //Thread.Sleep(5000);
-                        string apppath = @"E:\Program Files\7-Zip\7zG.exe";
-                        string passArguments = "x F:/uev/Saved/x.rar -oF:/uev/Content";
-                        Process z7p = Utility.CommandRun(apppath, passArguments);
-                        z7p.WaitForExit();
+                        //string apppath = @"E:\Program Files\7-Zip\7zG.exe";
+                        //string passArguments = "x F:/uev/Saved/x.rar -oF:/uev/Content";
+                        //Process z7p = Utility.CommandRun(apppath, passArguments);
+                        //z7p.WaitForExit();
 
                         IPAddress ipAd = IPAddress.Parse("192.168.1.240");
+                        ipAd = IPAddress.Parse(tcplocal);
                         TcpListener myList = new TcpListener(ipAd, 8003);
                         myList.Start();
+                        Utility.SubDirectoryDelete(animationundercontent);
                         string projectpath = @"F:\uev/pro422.uproject";
                         string Arguments = "";
                         projectpath = @"C:\Program Files\Epic Games\UE_4.22\Engine\Binaries\Win64/UE4Editor.exe";
                         Arguments = @"F:\uev/pro422.uproject";
+                        projectpath = unrealprojectpath;
+                        Arguments = projectshouldlaunched;
                         Process mpro = Utility.CommandRun(projectpath, Arguments);
                         Socket st = myList.AcceptSocket();
                         TCPClient tcpClient = new TCPClient(st);

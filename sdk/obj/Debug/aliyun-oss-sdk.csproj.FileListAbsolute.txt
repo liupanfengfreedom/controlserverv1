@@ -15,3 +15,12 @@ E:\VsProjects\controlserverv1\sdk\obj\Debug\aliyun-oss-sdk.csproj.GenerateResour
 E:\VsProjects\controlserverv1\sdk\obj\Debug\aliyun-oss-sdk.csproj.CoreCompileInputs.cache
 E:\VsProjects\controlserverv1\sdk\obj\Debug\Aliyun.OSS.dll
 E:\VsProjects\controlserverv1\sdk\obj\Debug\Aliyun.OSS.pdb
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\bin\Debug\Aliyun.OSS.dll
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\bin\Debug\Aliyun.OSS.pdb
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Debug\aliyun-oss-sdk.csprojAssemblyReference.cache
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Debug\Aliyun.OSS.Domain.OssResources.resources
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Debug\Aliyun.OSS.Properties.Resources.resources
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Debug\aliyun-oss-sdk.csproj.GenerateResource.cache
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Debug\aliyun-oss-sdk.csproj.CoreCompileInputs.cache
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Debug\Aliyun.OSS.dll
+C:\Users\liupanfeng\Downloads\controlserverv1-master\sdk\obj\Debug\Aliyun.OSS.pdb

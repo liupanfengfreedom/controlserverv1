@@ -111,12 +111,19 @@ namespace ControlServer
             {
                 DirectoryInfo dir = new DirectoryInfo(sourceDirName);
                 DirectoryInfo[] dirs = dir.GetDirectories();
+                FileInfo[] files = dir.GetFiles();
                 try
                 {
                     foreach (DirectoryInfo subdir in dirs)
                     {
                         string temppath = Path.Combine(sourceDirName, subdir.Name);
                         Directory.Delete(temppath, true);
+                    }
+                    foreach (FileInfo file in files)
+                    {
+                        //string temppath = Path.Combine(sourceDirName, file.FullName);
+                        //Directory.Delete(temppath, true);
+                        file.Delete();
                     }
                 }
                 catch
@@ -126,6 +133,7 @@ namespace ControlServer
             }
             return true;
         }
+     
         public static string MD5Hash(string input)
         {
             StringBuilder hash = new StringBuilder();

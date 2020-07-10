@@ -29,6 +29,7 @@ namespace ControlServer
         }
         void handlethreadfunc()
         {
+            string responseString = "failed";
             try
             {
                 HttpListenerRequest request = mhttplistenercontext.Request;
@@ -57,6 +58,12 @@ namespace ControlServer
                         string[] values = header.GetValues(a);
                         Program.remotehttpserver = values[0];              
                     }
+                    else if (a.Equals("fbx"))//
+                    {
+                        string[] values = header.GetValues(a);
+                        rarpath = values[0];
+                        responseString = "success";
+                    }
                 }
                 rarmessage mmessage;
                 mmessage.rarpath = rarpath;
@@ -84,7 +91,7 @@ namespace ControlServer
 
                 HttpListenerResponse response = mhttplistenercontext.Response;
                 // Construct a response.
-                string responseString = "success";
+                
                 //responseString += utfString;
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
                 // Get a response stream and write the response to it.
